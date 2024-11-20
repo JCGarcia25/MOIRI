@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+    <title>Materias</title>
+</head>
+<body>
+
+<section class="dinamico">
+    <div layout:fragment="views">
+        <div class="col mt-4 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h1 class="text-center text-primary">Listado de Materias</h1>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <table class="table table-striped" id="notasTable">
+                        <caption class="text-start">
+                            <strong>Nombre:</strong> <span th:text="${estudiante.getNombre}"></span><br>
+                            <strong>Código:</strong> <span th:text="${estudiante.getCodigo}"></span>
+                        </caption>
+                        <thead>
+                        <tr class="text-center">
+                            <th>Materia</th>
+                            <th>Calificación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="materia : ${materias}">
+                            <td th:text="${materia.key}"></td>
+                            <td th:text="${materia.value}"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Promedio</strong></td>
+                            <td th:text="${promedio}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        <button id="downloadPng" class="btn btn-primary">Descargar como PNG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block layout:fragment="page-scripts">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script th:src="@{js/views/Notas.js}" defer></script>
+</th:block>
+</body>
+</html>

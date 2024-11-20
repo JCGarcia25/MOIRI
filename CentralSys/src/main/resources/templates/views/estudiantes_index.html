@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+    <title>Estudiantes en proceso</title>
+</head>
+<body>
+
+<section class="dinamico">
+    <div layout:fragment="views">
+        <div class="col mt-4 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h1 class="text-center text-primary">Estudiantes en proceso</h1>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <table class="table table-striped" id="creditTable">
+                        <thead>
+                        <tr class="text-center">
+                            <th>Id</th>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Mes Actual</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="text-center" th:each="estudiante : ${estudiantes}">
+                            <td th:text="${estudiante.id}"></td>
+                            <td th:text="${estudiante.codigo}"></td>
+                            <td th:text="${estudiante.nombre}"></td>
+                            <td th:text="${estudiante.mes_actual}"></td>
+                            <td th:text="${estudiante.estado}"></td>
+                            <td style="width: 20vh;">                                
+                                <!-- Botón para mes_actual == 1 -->
+                                <button type="button" class="btn btn-primary" 
+                                        th:if="${estudiante.estado == 'aceptado'}" 
+                                        onclick="proceso(this)">
+                                    <i class="fa-solid fa-magnifying-glass mx-1"></i>
+                                    <span>Iniciar proceso</span>
+                                </button>
+                                
+                                <button type="button" class="btn btn-warning" 
+                                        th:if="${estudiante.mes_actual == 1 and estudiante.estado == 'En proceso'}" 
+                                        onclick="mensual(this)">
+                                    <i class="fa-solid fa-star mx-1"></i>
+                                    <span>Solicitar Reporte Mensual</span>
+                                </button>
+
+                                <!-- Botón para mes_actual != 1 -->
+                                <button type="button" class="btn btn-danger" 
+                                        th:if="${estudiante.mes_actual == 2}"
+                                        onclick="final(this)">
+                                    <i class="fa-solid fa-star mx-1"></i>
+                                    <span>Solicitar Reporte Final</span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block layout:fragment="page-scripts">
+    <script th:src="@{js/views/Estudiante.js}" defer></script>
+</th:block>
+</body>
+</html>

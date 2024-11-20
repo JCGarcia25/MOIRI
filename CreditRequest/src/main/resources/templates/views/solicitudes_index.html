@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+    <title>Estudiantes en proceso</title>
+</head>
+<body>
+
+<section class="dinamico">
+    <div layout:fragment="views">
+        <div class="col mt-4 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h1 class="text-center text-primary">Solicitudes en proceso</h1>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <table class="table table-striped" id="creditTable">
+                        <thead>
+                        <tr class="text-center">
+                            <th>Id</th>
+                            <th>Proceso</th>
+                            <th>Tipo</th>
+                            <th>Estudiante</th>
+                            <th>Subir Archivos</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="text-center" th:each="solicitud : ${solicitudes}">
+                            <td th:text="${solicitud.id}"></td>
+                            <td th:text="${solicitud.getEstudiante.getProceso}"></td>
+                            <td th:text="${solicitud.tipo == 1 ? 'Mensual' : 'Final'}"></td>
+                            <td th:text="${solicitud.getEstudiante.getNombre}"></td>
+                            <td style="width: 20vh;">                                
+                                <button id="subirAnexos" 
+                                        type="button" class="btn btn-success" 
+                                        data-toggle="modal" data-target="#exampleModal"
+                                        th:if="${solicitud.tipo == 1}" 
+                                        onclick="guardarSolicitudId(this)">
+                                    <i class="fa-solid fa-pen mx-1"></i>
+                                    <span>Subir Reporte Mensual</span>
+                                </button>
+                                
+                                <button id="subirAnexos" 
+                                        type="button" class="btn btn-success" 
+                                        data-toggle="modal" data-target="#exampleModal2"
+                                        th:if="${solicitud.tipo == 2}"
+                                        onclick="guardarSolicitudId(this)">
+                                    <i class="fa-solid fa-pen mx-1"></i>
+                                    <span>Subir Reporte Y Certificado</span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                             <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Documentos</h5>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="formMensual" onsubmit="return alertas(event)" enctype="multipart/form-data">
+
+                                <input type="hidden" id="solicitud_id" name="solicitud_id" />
+                                
+                                <div class="modal-body">
+                                   <div th:replace="fragments/formMensual.html"></div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-around">
+                                    <button id="submitBothForms" type="submit" class="btn btn-primary">Enviar</button>
+                                </div>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+                
+                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                             <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Documentos</h5>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="formFinal" onsubmit="return alertasFinal(event)" enctype="multipart/form-data">
+
+                                <input type="hidden" id="solicitud_id2" name="solicitud_id2" />
+                                
+                                <div class="modal-body">
+                                   <div th:replace="fragments/formFinal.html"></div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-around">
+                                    <button id="submitBothForms" type="submit" class="btn btn-primary">Enviar</button>
+                                </div>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block layout:fragment="page-scripts">
+    <script th:src="@{js/Solicitud.js}" defer></script>
+    <script th:src="@{js/validateForms.js}" defer></script>
+</th:block>
+</body>
+</html>

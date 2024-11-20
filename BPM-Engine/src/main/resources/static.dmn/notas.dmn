@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="notas" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.27.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
+  <decision id="Notas" name="Notas">
+    <decisionTable id="DecisionTable_1vn02n5">
+      <input id="Input_1" label="Nombre" camunda:inputVariable="Nombre">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>Nombre</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0ef23mr">
+          <text>"Johan Caicedo","Luis Medina","William Fraile"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1qumqz9" label="Codigo" camunda:inputVariable="Codigo">
+        <inputExpression id="LiteralExpression_1lqmiod" typeRef="string">
+          <text>Codigo</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0vrwk4g">
+          <text>"160004407","160004146","160004629"</text>
+        </inputValues>
+      </input>
+      <output id="Output_1" label="Materia 1" name="materia1" typeRef="integer" />
+      <output id="OutputClause_0p8g2iw" label="Materia 2" name="materia2" typeRef="integer" />
+      <output id="OutputClause_1129brn" label="Materia 3" name="materia3" typeRef="integer" />
+      <output id="OutputClause_10myh5s" label="Materia 4" name="materia4" typeRef="integer" />
+      <output id="OutputClause_0hsy7ro" label="Materia 5" name="materia5" typeRef="integer" />
+      <rule id="DecisionRule_1sjbeu8">
+        <inputEntry id="UnaryTests_038ru9i">
+          <text>"Johan Caicedo"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1l8dfe1">
+          <text>"160004407"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15yv7oq">
+          <text>5</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09qbgye">
+          <text>4</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wghtb4">
+          <text>5</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1om0e43">
+          <text>5</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uezxw1">
+          <text>5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00as1tk">
+        <inputEntry id="UnaryTests_02vhhp8">
+          <text>"Luis Medina"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_108w9of">
+          <text>"160004146"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1by4hff">
+          <text>3</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_065amn9">
+          <text>4</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1oqroew">
+          <text>3</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0kphg8o">
+          <text>3</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0z7fqu1">
+          <text>5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_15go7nk">
+        <inputEntry id="UnaryTests_0kfi312">
+          <text>"William Fraile"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m5u5xt">
+          <text>"160004629"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1y3eeeq">
+          <text>4</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ownpe3">
+          <text>4</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1e4piv9">
+          <text>3</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11hqjmn">
+          <text>4</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1dks343">
+          <text>4</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Notas">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+    <title>IES</title>
+</head>
+<body>
+
+<section class="dinamico">
+    <div layout:fragment="views">
+        <div class="col mt-4 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h1 class="text-center text-primary">Solicitudes Estudiantes</h1>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <table class="table table-striped" id="creditTable">
+                        <thead>
+                        <tr class="text-center">
+                            <th>Id</th>
+                            <th>Id Estudiante</th>
+                            <th>Código Estudiante</th>
+                            <th>Nombre Estudiante</th>
+                            <th>Estado</th>
+                            <th>Consultar Notas</th>
+                            <th>Enviar Certificado</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="text-center" th:each="solicitud : ${solicitudes}">
+                            <td th:text="${solicitud.id}"></td>
+                            <td th:text="${solicitud.getEstudiante.getId}"></td>
+                            <td th:text="${solicitud.getEstudiante.getCodigo}"></td>
+                            <td th:text="${solicitud.getEstudiante.getNombre}"></td>
+                            <td th:text="${solicitud.getEstudiante.getEstado}"></td>
+                            <td style="width: 20vh;">                                
+                                <button id="subirAnexos" 
+                                        type="button" class="btn btn-info" 
+                                        th:if="${solicitud.anexo == null}" 
+                                        onclick="consultarNotas(this)">
+                                    <i class="fa-solid fa-pen mx-1"></i>
+                                    <span>Consultar Notas</span>
+                                </button>
+                            </td>
+                            <td style="width: 20vh;">                                
+                                <button id="subirAnexos" 
+                                        type="button" class="btn btn-secondary" 
+                                        data-toggle="modal" data-target="#exampleModal"
+                                        th:if="${solicitud.anexo == null}" 
+                                        onclick="guardarSolicitudId(this)">
+                                    <i class="fa-solid fa-pen mx-1"></i>
+                                    <span>Enviar certificado</span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                             <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Certificado</h5>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="formMensual" onsubmit="return alertas(event)" enctype="multipart/form-data">
+
+                                <input type="hidden" id="solicitud_id" name="solicitud_id" />
+                                
+                                <div class="modal-body">
+                                   <div th:replace="fragments/formCertificado.html"></div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-around">
+                                    <button id="submitBothForms" type="submit" class="btn btn-primary">Enviar</button>
+                                </div>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block layout:fragment="page-scripts">
+    <script th:src="@{js/views/SolicitudIse.js}" defer></script>
+</th:block>
+</body>
+</html>

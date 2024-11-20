@@ -1,0 +1,33 @@
+{
+  "components": [
+    {
+      "label": "Nombre de Estudiante",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0oscwom",
+        "columns": null
+      },
+      "id": "Field_0bak2cw",
+      "key": "Nombre"
+    },
+    {
+      "label": "Código del estudiante",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0bous0b",
+        "columns": null
+      },
+      "id": "Field_02lxcua",
+      "key": "Codigo"
+    }
+  ],
+  "type": "default",
+  "id": "datos_estudiante",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.27.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+    <title>IES</title>
+</head>
+<body>
+
+<section class="dinamico">
+    <div layout:fragment="views">
+        <div class="col mt-4 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h1 class="text-center text-primary">Solicitudes Institución Superior Exterior</h1>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <table class="table table-striped" id="creditTable">
+                        <thead>
+                        <tr class="text-center">
+                            <th>Id</th>
+                            <th>Id Estudiante</th>
+                            <th>Código Estudiante</th>
+                            <th>Nombre Estudiante</th>
+                            <th>Estado</th>
+                            <th>Solicitar Certificado</th>
+                            <th>Descargar Anexo</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="text-center" th:each="solicitud : ${solicitudes}">
+                            <td th:text="${solicitud.id}"></td>
+                            <td th:text="${solicitud.getEstudiante.getId}"></td>
+                            <td th:text="${solicitud.getEstudiante.getCodigo}"></td>
+                            <td th:text="${solicitud.getEstudiante.getNombre}"></td>
+                            <td th:text="${solicitud.getEstudiante.getEstado}"></td>
+                            <td style="width: 20vh;">                                
+                                <button id="subirAnexos" 
+                                        type="button" class="btn btn-success" 
+                                        th:if="${solicitud.getEstudiante.getEstado == 'En Proceso Final' and solicitud.anexo == null and solicitud.cargada == false}" 
+                                        onclick="solicitarCertificado(this)">
+                                    <i class="fa-solid fa-pen mx-1"></i>
+                                    <span>Solicitar certificado</span>
+                                </button>
+                            </td>
+                            <td style="width: 20vh;">
+                                <button type="button" class="btn btn-primary btn-sm ml-2" 
+                                        th:if="${solicitud.getEstudiante.getEstado == 'En Proceso Final' and solicitud.anexo != null}" 
+                                        onclick="descargarCertificado(this)" 
+                                        th:data-url="${solicitud.anexo}">
+                                    Descargar Certificado
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block layout:fragment="page-scripts">
+    <script th:src="@{js/SolicitudIse.js}" defer></script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head th:replace="layout/layout :: head">
+    <meta charset="UTF-8">
+    <title>Estudiantes en proceso</title>
+</head>
+<body>
+
+<section class="dinamico">
+    <div layout:fragment="views">
+        <div class="col mt-4 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h1 class="text-center text-primary">Anexos</h1>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <ul>
+                        <li th:each="anexo : ${anexos}">
+                            <span th:text="'Anexo ' + ${anexo.getId} + ':'"></span> 
+                            <!-- <a th:href="${anexo.getNombreArchivo}" target="_blank" th:text="${anexo.getNombreArchivo}"></a> -->
+                            <!-- Botón para previsualizar -->
+                            <button type="button" class="btn btn-primary btn-sm ml-2" 
+                                    onclick="mostrarPrevisualizacion(this)" 
+                                    th:data-url="${anexo.getNombreArchivo}">
+                                Previsualizar
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Contenedor para la previsualización -->
+                    <div id="visor-pdf" class="mt-4" style="display: none;">
+                        <h5 class="text-center">Vista previa del anexo</h5>
+                        <iframe id="iframe-pdf" src="" width="100%" height="500px" style="border: none;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block layout:fragment="page-scripts">
+    <script th:src="@{js/views/Anexos.js}" defer></script>
+</th:block>
+</body>
+</html>
